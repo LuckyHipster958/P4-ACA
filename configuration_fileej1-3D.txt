@@ -1,0 +1,30 @@
+#BASIC-ROUTER
+//Par´ametros de configuraci´on del tr´afico
+TRAFFIC_MODE synthetic
+NUMBER_OF_TRANSIENT_MESSAGES 200000
+NUMBER_OF_PERMANENT_MESSAGES 200000
+NUMBER_OF_TRAFFIC_POINTS 10
+TRAFFIC_ALL uniform 0.1 0.2 0.3 0.4 0.5 0.6 0.7 0.8 0.9 1
+//Par´ametros de la topolog´ıa
+NUMBER_OF_NICS 64
+NUMBER_OF_ROUTERS 64
+TOPOLOGY_TYPE nDtorus 3
+ROUTERS_IN_DIMENSION_N 4 4 4
+ROUTING_TYPE dor
+//Desactivamos el encaminamiento adaptativo
+ADAPTIVE_PACKETS_ALLOWED no
+//Par´ametros de estad´ısticas
+OUTPUT_STATS_MODE table
+OUTPUT_STATS_TO_FILE 0
+RANDOM_SEED 1
+// parámetros de la arquitectura
+NUMBER_OF_PORTS 7 // 3x2 + 1
+BYTES_PER_FLIT 16 // 16 bytes o 128 bits
+PACKET_SIZE 8
+QUEUE_SIZE 4096  // 1024 / 8 = 128 créditos por buffer
+// Toro require dos VCs para evitar deadlock
+NUMBER_OF_VCS 2
+//Por tanto, hay 512 flits (64 créditos) por canal virtual
+SHORT_MESSAGE_SIZE 8 // flits (o 1 paquete)
+LONG_MESSAGE_SIZE 64 // flits (o 8 paquetes)
+PERCENTAGE_SHORT_MESSAGES 75 //75% mensajes cortos, 25% mensajes largos
